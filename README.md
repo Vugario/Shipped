@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/Vugario/Shipped.svg?style=svg)](https://circleci.com/gh/Vugario/Shipped)
+
 # Shipped
 A simple release management tool with notes, test results, and release planning.
 
