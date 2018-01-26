@@ -19,6 +19,9 @@ provision-composer:
 provision-database:
 	docker-compose exec shipped_app php artisan migrate --seed
 
+test:
+	docker-compose exec shipped_app ./vendor/bin/phpunit
+
 rebuild:
 	docker-compose build
 

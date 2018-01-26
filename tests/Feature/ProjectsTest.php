@@ -5,16 +5,20 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class ExampleTest extends TestCase
+class ProjectsTest extends TestCase
 {
+    use RefreshDatabase;
+
     /**
      * A basic test example.
      *
      * @return void
      */
-    public function testBasicTest()
+    public function testUserCanViewProjects()
     {
-        $response = $this->get('/');
+        $this->be($user = factory('App\User')->create());
+
+        $response = $this->get('/projects');
 
         $response->assertStatus(200);
     }
