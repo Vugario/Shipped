@@ -1,0 +1,8 @@
+.site-header a {
+  color: #333;
+  transition: ease-in-out color .15s;
+}
+.site-header a:hover {
+  color: #999;
+  text-decoration: none;
+}

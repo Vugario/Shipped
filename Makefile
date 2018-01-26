@@ -11,10 +11,13 @@ provision:
 	make provision-composer
 	cp .env.example .env
 	docker-compose exec shipped_app php artisan key:generate
-	docker-compose exec shipped_app php artisan migrate --seed
+	make provision-database
 
 provision-composer:
 	docker-compose exec shipped_app composer.phar install --no-interaction
+
+provision-database:
+	docker-compose exec shipped_app php artisan migrate --seed
 
 rebuild:
 	docker-compose build
@@ -27,3 +30,6 @@ up:
 
 down:
 	docker-compose down
+
+tinker:
+	docker-compose exec shipped_app php artisan tinker
