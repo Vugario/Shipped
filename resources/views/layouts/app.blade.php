@@ -14,49 +14,68 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <header class="my-4">
-        <div class="container">
-            <a class="navbar-brand float-left" href="{{ url('/') }}">
-                {{ config('app.name', 'Laravel') }}
-            </a>
-            <ul class="nav justify-content-end">
-                @guest
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}">Register</a>
-                    </li>
-                @else
-                    <li class="dropdown nav-item">
-                        <a href="#" class="nav-link">
-                            {{ Auth::user()->name }}
-                        </a>
-                    </li>
+    <header class="mb-3">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="/">Shipped</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('logout') }}"
-                           onclick="event.preventDefault();
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ Auth::user()->projects ? Auth::user()->projects[0]->name : 'No projects' }}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                @foreach (Auth::user()->projects as $project)
+                                    <a class="dropdown-item" href="#">{{ $project->name }}</a>
+                                @endforeach
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{{ route('projects.create') }}">New project</a>
+                            </div>
+                        </li>
+                        <li class="nav-item nav-item-divider mx-2"></li>
+                        <li class="nav-item{{ Request::is('home*') ? ' active' : '' }}">
+                            <a class="nav-link" href="{{ route('user.dashboard') }}">
+                                Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item{{ Request::is('projects*') ? ' active' : '' }}">
+                            <a class="nav-link" href="{{ route('projects.index') }}">
+                                Projects
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav">
+                        <li class="nav-item{{ Request::is('settings*') ? ' active' : '' }}">
+                            <a class="nav-link" href="{{ route('user.dashboard') }}">
+                                Settings
+                            </a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('user.dashboard') }}">{{ Auth::user()->name }}</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
                            document.getElementById('logout-form').submit();"
-                        >
-                            Logout
-                        </a>
+                            >
+                                Logout
+                            </a>
 
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            {{ csrf_field() }}
-                        </form>
-                    </li>
-                @endguest
-            </ul>
-        </div>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
     </header>
 
-    <div class="content">
-        <div class="container">
-            @yield('content')
-        </div>
+    <div class="container">
+        @yield('content')
     </div>
-
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>

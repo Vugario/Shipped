@@ -20,3 +20,23 @@ Route::group(['middleware' => ['auth']], function()
     Route::get('home', 'UserController@dashboard')->name('user.dashboard');
     Route::resource('projects', 'ProjectController');
 });
+
+/** Development routes */
+Route::get('users', function()
+{
+    $users = \App\User::all()->toArray();
+
+    foreach ($users as $id => $user)
+    {
+        $users[$id]['sso_link'] = url('users/sso/' . $user['id']);
+    }
+
+    return $users;
+});
+
+Route::get('users/sso/{user}', function (\App\User $user)
+{
+    Auth::login($user);
+
+    return redirect(route('user.dashboard'));
+});

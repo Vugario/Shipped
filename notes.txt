@@ -1,0 +1,35 @@
+# Shipped
+A simple release management tool with notes, test results, and release planning.
+
+## Why
+- Keep track of what is being released
+    - and when
+- Provide instructions on how to deploy (Release planning)
+- Keep track of how it has been tested
+- Provide clear release notes
+
+## How
+When a PR is created in Github
+A PR is created in Shipped
+When test results from Github come in
+These test results will be visible in Shipped
+Additional tests may be trigered from Shipped (End-to-end, Manual Sanity)
+Special requirements can be specified for deployment (schema updates, config changes, etc.)
+
+## Incidents
+List of reported incidents and their current status.
+- Allow to assign and/or page someone, maybe a team?
+- History list
+- Link tickets or pull requests
+- Connect to statuspage.io?
+
+## Data model
+1. Project
+2. Branch
+3. Tests
+4. Release
+5. Users
+
+A. A project contains multiple branches
+B. A branch can have multiple tests
+C. A branch can be in multiple releases

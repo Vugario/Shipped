@@ -9994,6 +9994,8 @@ a.text-dark:focus {
   }
 }
 
+/** Flex **/
+
 .flex-equal > * {
   -ms-flex: 1;
   -webkit-box-flex: 1;
@@ -10006,6 +10008,16 @@ a.text-dark:focus {
     -webkit-box-flex: 1;
     flex: 1;
   }
+}
+
+/** Navbar **/
+
+.nav-item-divider {
+  width: 1px;
+}
+
+.navbar-dark .nav-item-divider {
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .site-header a {
